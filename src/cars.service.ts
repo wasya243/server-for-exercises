@@ -10,7 +10,7 @@ export class CarsService {
 
   async findAll({ pagination, sort, filters }: { pagination: any, sort: any, filters: any }): Promise<{
     total: number,
-    products: Car[],
+    cars: Car[],
   }> {
     let mongoFilters = {};
     if (!_.isEmpty(filters)) {
@@ -109,7 +109,7 @@ export class CarsService {
 
     return {
       total,
-      products: documents
+      cars: documents
     }
   }
 
