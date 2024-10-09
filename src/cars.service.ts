@@ -124,4 +124,8 @@ export class CarsService {
   create(createData: any) {
     return this.carsModel.create(createData);
   }
+
+  findById(id: string) {
+    return this.carsModel.findById(id);
+  }
 }

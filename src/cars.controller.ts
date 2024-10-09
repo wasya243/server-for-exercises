@@ -1,9 +1,15 @@
-import { Controller, Delete, Param, Body, Post, Put } from '@nestjs/common';
+import { Controller, Delete, Param, Body, Post, Put, Get } from '@nestjs/common';
 import { CarsService } from './cars.service';
 
 @Controller('cars')
 export class CarsController {
   constructor(private readonly carsService: CarsService) {}
+
+
+  @Get('/:id')
+  getById(@Param() params: any) {
+    return this.carsService.findById(params.id);
+  }
 
   @Post('/create')
   createCar(@Body() body: any) {

@@ -101,4 +101,8 @@ export class ProductsService {
   create(createData: any) {
     return this.productModel.create(createData);
   }
+
+  getById(id: string) {
+    return this.productModel.findById(id);
+  }
 }
