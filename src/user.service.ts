@@ -8,11 +8,22 @@ import { User } from './user.schema';
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async findAll({ pagination, sort, filters }: { pagination: any, sort: any, filters: any }): Promise<{
+  async findAll({ pagination, sort, filters, searchQuery }: { pagination: any, sort: any, filters: any, searchQuery: any }): Promise<{
     total: number,
     users: User[],
   }> {
-    let mongoFilters = {};
+    let mongoFilters:any = {};
+
+    if (searchQuery) {
+      const regexp = new RegExp(_.escapeRegExp(searchQuery), 'gi');
+
+      mongoFilters['$or'] = [
+        { firstName: { $regex: regexp } },
+        { lastName: { $regex: regexp } },
+        { email: { $regex: regexp } }
+      ];
+    }
+
     if (!_.isEmpty(filters)) {
       if(filters.salaryTo && !filters.salaryFrom) {
         mongoFilters = {

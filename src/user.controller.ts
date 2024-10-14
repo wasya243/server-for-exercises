@@ -13,8 +13,9 @@ export class UserController {
     };
     const sort = body.sort;
     const filters = body.filters;
+    const searchQuery = body.searchQuery;
 
-    return this.userService.findAll({ pagination, sort, filters });
+    return this.userService.findAll({ pagination, sort, filters, searchQuery });
   }
 
   @Put('/:id')
